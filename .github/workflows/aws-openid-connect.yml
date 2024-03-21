@@ -1,0 +1,33 @@
+name: AWS Github Action Github OIDC role
+run-name: ${{ github.actor }} is testing AWS Github Action Github OIDC role 🚀
+on:
+  push:
+    branches:
+      - 'demo'
+jobs:
+  deploy:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::590183815216:role/GithubUNODemo
+          aws-region: us-east-1
+      - name: List s3 files
+        run: |
+          aws s3api list-buckets
+      - name: List all roles
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::563859100705:role/GithubAction
+          aws-region: us-west-2
+      - name: List all iam roles
+        run: |
+          aws iam list-roles

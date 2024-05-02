@@ -1,5 +1,8 @@
 import boto3
 
+# Initialize the DynamoDB client with the specified region
+dynamodb = boto3.client('dynamodb', region_name='us-east-1')  # Change 'us-east-1' to your desired region
+
 # Initialize the DynamoDB client
 dynamodb = boto3.client('dynamodb')
 

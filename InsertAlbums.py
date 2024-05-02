@@ -12,19 +12,19 @@ items = [
         'Artist': {'S': 'Piano Man'},
         'Songs': {'S': 'Billy Joel'},
         'Album': {'S': 'Piano Man'},
-        'ReleaseYear': {'N': '1973'}  # Example extra attribute
+        'ReleaseYear': {'N': '1973'}
     },
     {
         'Artist': {'S': 'Eminem'},
         'Songs': {'S': 'Lose Yourself'},
         'Album': {'S': '8 Mile Soundtrack'},
-        'ReleaseYear': {'N': '2002'}  # Example extra attribute
+        'ReleaseYear': {'N': '2002'}
     },
     {
         'Artist': {'S': 'Queen'},
         'Songs': {'S': 'Bohemian Rhapsody'},
         'Album': {'S': 'A Night at the Opera'},
-        'ReleaseYear': {'N': '1975'}  # Example extra attribute
+        'ReleaseYear': {'N': '1975'}
     }
 ]
 

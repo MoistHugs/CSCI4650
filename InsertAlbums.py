@@ -9,10 +9,10 @@ table_name = 'Albums'
 # Define the items to be inserted
 items = [
     {
-        'Artist': {'S': 'Pinkfong'},
-        'Songs': {'S': 'Baby Shark'},
-        'Album': {'S': 'Baby Shark Special'},
-        'ReleaseYear': {'N': '2016'}  # Example extra attribute
+        'Artist': {'S': 'Piano Man'},
+        'Songs': {'S': 'Billy Joel'},
+        'Album': {'S': 'Piano Man'},
+        'ReleaseYear': {'N': '1973'}  # Example extra attribute
     },
     {
         'Artist': {'S': 'Eminem'},

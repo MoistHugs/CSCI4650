@@ -2,7 +2,7 @@ import boto3
 import time
 
 # Initialize the DynamoDB client with the specified region
-dynamodb = boto3.client('dynamodb', region_name='us-east-2')
+dynamodb = boto3.client('dynamodb', region_name='us-east-1')
 
 # Define the table schema
 table_name = 'Albums'

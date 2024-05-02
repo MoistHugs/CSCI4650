@@ -1,4 +1,5 @@
 import boto3
+import time
 
 # Initialize the DynamoDB client with the specified region
 dynamodb = boto3.client('dynamodb', region_name='us-east-1')  # Change 'us-east-1' to your desired region
@@ -33,17 +34,30 @@ provisioned_throughput = {
 }
 
 # Create the DynamoDB table
-response = dynamodb.create_table(
-    TableName=table_name,
-    KeySchema=key_schema,
-    AttributeDefinitions=attribute_definitions,
-    ProvisionedThroughput=provisioned_throughput
-)
+try:
+    response = dynamodb.create_table(
+        TableName=table_name,
+        KeySchema=key_schema,
+        AttributeDefinitions=attribute_definitions,
+        ProvisionedThroughput=provisioned_throughput
+    )
 
-# Wait until the table is created
-table_description = None
-while table_description is None or table_description['TableStatus'] != 'ACTIVE':
-    table_description = dynamodb.describe_table(TableName=table_name)
-    print("Table status:", table_description['TableStatus'])
+    # Wait until the table is created
+    while True:
+        response = dynamodb.describe_table(TableName=table_name)
+        table_status = response['Table']['TableStatus']
+        print("Table status:", table_status)
+        
+        if table_status == 'ACTIVE':
+            print("Table 'Albums' created successfully!")
+            break
+        elif table_status == 'CREATING':
+            time.sleep(5)  # Wait for 5 seconds before checking again
+        else:
+            print("Table creation failed. Status:", table_status)
+            break
 
-print("Table 'Albums' created successfully!")
+except dynamodb.exceptions.ResourceInUseException:
+    print(f"Table '{table_name}' already exists. Skipping creation.")
+except Exception as e:
+    print("An error occurred:", str(e))
